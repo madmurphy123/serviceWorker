@@ -118,12 +118,13 @@
 //});
 
 
-var CACHE_NAME = 'gih-cache-v2';
+var CACHE_NAME = 'gih-cache-v4';
 var CACHED_URLS = [
   'offline.html',
   'mystyles.css',
   'dino.png'
 ];
+
 
 self.addEventListener('install', function(event) {
   event.waitUntil(
@@ -146,6 +147,21 @@ self.addEventListener('fetch', function(event) {
     })
   );
 });
+
+self.addEventListener('activate', function(event) {
+  event.waitUntil(
+    caches.keys().then(function(cacheNames) {
+      return Promise.all(
+        cacheNames.map(function(cacheName) {
+          if (CACHE_NAME !== cacheName && cacheName.startsWith('gih-cache')) {
+            return caches.delete(cacheName);
+          }
+        })
+      );
+    })
+  );
+});
+
 
 
 
