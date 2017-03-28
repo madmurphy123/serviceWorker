@@ -5,7 +5,8 @@ var CACHED_URLS = [
   'styles.css',
   'mystyles.css',
   'material.css',
-  'material.js', 
+  'material.js',
+  'offline-map.js',
   'appimages/android-icon-36x36.png',
   'appimages/android-icon-48x48.png',
   'appimages/android-icon-72x72.png',
@@ -69,8 +70,8 @@ self.addEventListener('fetch', function(event) {
       })
     );
   } else if (
-    CACHED_URLS.indexOf(requestURL.href) !== -1 ||
-    CACHED_URLS.indexOf(requestURL.pathname) !== -1
+    CACHED_URLS.indexOf(requestURL.href) === -1 ||
+    CACHED_URLS.indexOf(requestURL.pathname) === -1
   ) {
     event.respondWith(
       caches.open(CACHE_NAME).then(function(cache) {

@@ -23,10 +23,10 @@
 <meta name="msapplication-TileColor" content="#ffffff">
 <meta name="msapplication-TileImage" content="appimages/ms-icon-144x144.png">
 <meta name="theme-color" content="#db5945"> 
-     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:regular,bold,italic,thin,light,bolditalic,black,medium&amp;lang=en">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-    <link rel="stylesheet" href="material.css">
-    <link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:regular,bold,italic,thin,light,bolditalic,black,medium&amp;lang=en">
+<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+<link rel="stylesheet" href="material.css">
+<link rel="stylesheet" href="styles.css">
 
   </head>
   <body>
@@ -52,23 +52,8 @@
                 Tempor tempor aliqua in commodo cillum Lorem magna dolore proident Lorem. Esse ad consequat est excepteur irure eu irure quis aliqua qui. Do mollit esse veniam excepteur ut veniam anim minim dolore sit commodo consequat duis commodo. Sunt dolor reprehenderit ipsum minim eiusmod eu consectetur anim excepteur eiusmod. Duis excepteur anim dolor sit enim veniam deserunt anim adipisicing Lorem elit. Cillum sunt do consequat elit laboris nisi consectetur.
               </p>
             <h3>Sub Title</h3>
-                 <div id="map"></div>
-        <script>
-      function initMap() {
-        var uluru = {lat: 2.1794, lng: 53.0027};
-        var map = new google.maps.Map(document.getElementById('map'), {
-          zoom: 2,
-          center: uluru
-        });
-        var marker = new google.maps.Marker({
-          position: uluru,
-          map: map
-        });
-      }
-    </script>
-    <script async defer
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD8GS9IEYRrTEbXtN7rI1Z6in3XFB9z2W0&callback=initMap">
-    </script>
+            <div id="map"></div>
+        
               <p>
                 Cillum dolor esse sit incididunt velit eiusmod magna ad nostrud officia aute dolor dolor. Magna esse ullamco pariatur adipisicing consectetur eu commodo officia. Ex cillum consequat mollit minim elit est deserunt occaecat nisi amet. Quis aliqua nostrud Lorem occaecat sunt. Eiusmod quis amet ullamco aliquip dolore ut incididunt duis adipisicing. Elit consequat nisi eiusmod aute ipsum sunt veniam do est. Occaecat mollit aliquip ut proident consectetur amet ex dolore consectetur aliqua elit.
               </p>
@@ -174,6 +159,22 @@
       </main>
     </div>
        <script src="material.js"></script>
+      <script>
+      function initMap() {
+        var uluru = {lat:53.008037, lng: -2.177920 };
+        var map = new google.maps.Map(document.getElementById('map'), {
+          zoom: 15,
+          center: uluru
+        });
+        var marker = new google.maps.Marker({
+          position: uluru,
+          map: map
+        });
+      }
+    </script>
+    <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD8GS9IEYRrTEbXtN7rI1Z6in3XFB9z2W0&callback=initMap">
+    </script>
       <script>
       if ('serviceWorker' in navigator) {
     navigator.serviceWorker.register('serviceworker.js').then(function(registration) {
