@@ -69,6 +69,16 @@ self.addEventListener('fetch', function(event) {
         });
       })
     );
+        } else if (requestURL.href === googleMapsAPIJS) {
+    event.respondWith(
+      fetch(
+        googleMapsAPIJS+'&'+Date.now(),
+        { mode: 'no-cors', cache: 'no-store' }
+      ).catch(function() {
+        return caches.match('offline-map.js');
+      })
+    );
+
   } else if (
     CACHED_URLS.indexOf(requestURL.href) === -1 ||
     CACHED_URLS.indexOf(requestURL.pathname) === -1
