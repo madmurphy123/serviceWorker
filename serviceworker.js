@@ -1,12 +1,11 @@
-var CACHE_NAME = 'gih-cache-v5';
+var CACHE_NAME = 'gih-cache-v4';
 var CACHED_URLS = [
   // Our HTML
   'first.html',
   'styles.css',
   'mystyles.css',
   'material.css',
-  'material.js',
-    
+  'material.js', 
   'appimages/android-icon-36x36.png',
   'appimages/android-icon-48x48.png',
   'appimages/android-icon-72x72.png',
