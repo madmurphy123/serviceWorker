@@ -38,7 +38,7 @@ var CACHED_URLS = [
     'eventsimages/example-work06.jpg',
     'eventsimages/example-work07.jpg',
     'eventsimages/example-work08.jpg',
-    'eventsimages/example-work09.jpg',
+    'eventsimages/example-work09.jpg'
   // Stylesheets and fonts
   // JavaScript
   // Images
