@@ -70,8 +70,8 @@ self.addEventListener('fetch', function(event) {
       })
     );
   } else if (
-    CACHED_URLS.indexOf(requestURL.href) === -1 ||
-    CACHED_URLS.indexOf(requestURL.pathname) === -1
+    CACHED_URLS.indexOf(requestURL.href) !== -1 ||
+    CACHED_URLS.indexOf(requestURL.pathname) !== -1
   ) {
     event.respondWith(
       caches.open(CACHE_NAME).then(function(cache) {
@@ -89,7 +89,8 @@ self.addEventListener('activate', function(event) {
     caches.keys().then(function(cacheNames) {
       return Promise.all(
         cacheNames.map(function(cacheName) {
-          if (cacheName.startsWith('gih-cache') && CACHE_NAME !== cacheName) {
+          if (CACHE_NAME !== cacheName && cacheName.startsWith('gih-cache')) {
+//          if (cacheName.startsWith('gih-cache') && CACHE_NAME !== cacheName) {
             return caches.delete(cacheName);
           }
         })
