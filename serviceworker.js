@@ -13,7 +13,7 @@ var CACHED_URLS = [
   'appimages/android-icon-192x192.png',
   'appimages/android-icon-36x36.png',
   'appimages/jack.jpg',
-  'appimages/paddy.jpg',
+//  'appimages/paddy.jpg',
   'appimages/favicon-16x16.png',
   'appimages/favicon-32x32.png',
   'appimages/favicon-96x96.png',
@@ -52,19 +52,36 @@ self.addEventListener('install', function(event) {
   );
 });
 
+
+
 self.addEventListener('fetch', function(event) {
-  event.respondWith(
-    fetch(event.request).catch(function() {
-      return caches.match(event.request).then(function(response) {
-        if (response) {
-          return response;
-        } else if (event.request.headers.get('accept').includes('text/html')) {
-          return caches.match('first.html');
-        }
-      });
-    })
-  );
+  var requestURL = new URL(event.request.url);
+  if (requestURL.pathname === 'first.html') {
+    event.respondWith(
+      caches.open(CACHE_NAME).then(function(cache) {
+        return cache.match('first.html').then(function(cachedResponse) {
+          var fetchPromise = fetch('first.html').then(function(networkResponse) {
+            cache.put('first.html', networkResponse.clone());
+            return networkResponse;
+          });
+          return cachedResponse || fetchPromise;
+        });
+      })
+    );
+  } else if (
+    CACHED_URLS.indexOf(requestURL.href) !== -1 ||
+    CACHED_URLS.indexOf(requestURL.pathname) !== -1
+  ) {
+    event.respondWith(
+      caches.open(CACHE_NAME).then(function(cache) {
+        return cache.match(event.request).then(function(response) {
+          return response || fetch(event.request);
+        })
+      })
+    );
+  }
 });
+
 
 self.addEventListener('activate', function(event) {
   event.waitUntil(
