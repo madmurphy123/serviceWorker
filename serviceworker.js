@@ -44,6 +44,9 @@ var CACHED_URLS = [
   // Images
 ];
 
+var googleMapAPI = 'https://maps.googleapis.com/maps/api/js?key=AIzaSyD8GS9IEYRrTEbXtN7rI1Z6in3XFB9z2W0&callback=initMap';
+    
+    
 self.addEventListener('install', function(event) {
   // Cache everything in CACHED_URLS. Installation will fail if something fails to cache
   event.waitUntil(
@@ -69,10 +72,10 @@ self.addEventListener('fetch', function(event) {
         });
       })
     );
-        } else if (requestURL.href === 'https://maps.googleapi.com/js') {
+        } else if (requestURL.href === googleMapAPI) {
     event.respondWith(
       fetch(
-        'https://maps.googleapi.com/js&'+Date.now(),
+        googleMapAPI+'&'+Date.now(),
         { mode: 'no-cors', cache: 'no-store' }
       ).catch(function() {
         return caches.match('offline-map.js');
