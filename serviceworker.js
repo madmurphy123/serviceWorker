@@ -41,10 +41,17 @@ var CACHED_URLS = [
     BASE_PATH + 'eventsimages/example-work06.jpg',
     BASE_PATH + 'eventsimages/example-work07.jpg',
     BASE_PATH + 'eventsimages/example-work08.jpg',
-    BASE_PATH + 'eventsimages/example-work09.jpg',  
+    BASE_PATH + 'eventsimages/example-work09.jpg',
+    BASE_PATH + 'appimages/event-default.png', //default image on blog
+
     // JavaScript
     BASE_PATH + 'offline-map.js',
     BASE_PATH + 'material.js',
+    BASE_PATH + 'scripts.js',
+    
+    //json
+    BASE_PATH + 'events.json',
+    
     // Manifest
     BASE_PATH + 'manifest.json',
   // CSS and fonts
@@ -90,6 +97,34 @@ self.addEventListener('fetch', function(event) {
         return caches.match('offline-map.js');
       })
     );
+      
+      // Handle requests for events JSON file
+  } else if (requestURL.pathname === BASE_PATH + 'events.json') {
+    event.respondWith(
+      caches.open(CACHE_NAME).then(function(cache) {
+        return fetch(event.request).then(function(networkResponse) {
+          cache.put(event.request, networkResponse.clone());
+          return networkResponse;
+        }).catch(function() {
+          return caches.match(event.request);
+        });
+      })
+    );
+  // Handle requests for event images.
+  } else if (requestURL.pathname.includes('/eventsimages/')) {
+    event.respondWith(
+      caches.open(CACHE_NAME).then(function(cache) {
+        return cache.match(event.request).then(function(cacheResponse) {
+          return cacheResponse||fetch(event.request).then(function(networkResponse) {
+            cache.put(event.request, networkResponse.clone());
+            return networkResponse;
+          }).catch(function() {
+            return cache.match('appimages/event-default.png');
+          });
+        });
+      })
+    );
+
   } else if (
     CACHED_URLS.includes(requestURL.href) ||
     CACHED_URLS.includes(requestURL.pathname)
