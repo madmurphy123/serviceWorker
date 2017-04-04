@@ -1,7 +1,7 @@
 var BASE_PATH = '/serviceWorker/';
 var CACHE_NAME = 'gih-cache-v6';
 var TEMP_IMAGE_CACHE_NAME = 'temp-cache-v1';
-var newsAPIJSON = "https://newsapi.org/v1/articles?source=bbc-news&apiKey=YOURKEY";
+var newsAPIJSON = "https://newsapi.org/v1/articles?source=bbc-news&apiKey=a5ba2a0461c24459b8c4f3e746c9ae8f";
 
 var CACHED_URLS = [
     // Our HTML
